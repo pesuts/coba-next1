@@ -3,16 +3,16 @@ import ProductView from "@/views/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { ProductType } from "../../types/product.type";
+// import { ProductType } from "../../types/product.type";
 
-type Response = {
-  data: ProductType[];
-  status: string;
-};
+// type Response = {
+//   data: ProductType[];
+//   status: string;
+// };
 
 const ProductPage = () => {
   const [isLogin] = useState(true);
-  const [products, setProducts] = useState<ProductType[]>([]);
+  // const [products, setProducts] = useState<ProductType[]>([]);
   const { push } = useRouter();
 
   useEffect(() => {
