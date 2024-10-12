@@ -1,0 +1,17 @@
+@import "@/styles/colors.scss";
+
+.login{
+  /* margin: 50px auto; */
+  /* width: 70%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100vh;
+  background-color: map-get($schema, primary);
+}
+
+.login button{
+  padding: 10px 35px;
+}
