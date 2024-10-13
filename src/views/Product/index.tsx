@@ -5,7 +5,7 @@ import Link from "next/link";
 const ProductView = ({ products }: ProductsProps) => {
   return (
     <div className={styles.product}>
-      <h1 className={styles.product__title}>Product</h1>
+      <h1 className={styles.product__title}>Products</h1>
       <div className={styles.product__content}>
         {products && products.length > 0 ? (
           <>
@@ -21,7 +21,7 @@ const ProductView = ({ products }: ProductsProps) => {
                   {product.category}
                 </h4>
                 <h4 className={styles.product__content__item__price}>
-                  {product.price.toLocaleString("id", {
+                  {product.price && product.price.toLocaleString("id", {
                     style: "currency",
                     currency: "IDR",
                   })}

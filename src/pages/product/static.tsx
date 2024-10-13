@@ -24,5 +24,6 @@ export async function getStaticProps() {
       products: response.data,
       // products: [] // Testing Build,
     },
+    // revalidate: 60 // seconds,
   };
 }

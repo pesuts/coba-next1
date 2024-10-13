@@ -103,20 +103,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({
-  params,
+  // params,
 }: {
   params: { product: string };
 }) {
-  const productId = params.product;
-  const response = await fetch(
-    `http://localhost:3000/api/product/${productId}`
-  );
-  const JSONresponse = await response.json();
-  const product = JSONresponse.data;
+  // const productId = params.product;
+  // const response = await fetch(
+  //   `http://localhost:3000/api/product/${productId}`
+  // );
+  // const JSONresponse = await response.json();
+  // const product = JSONresponse.data;
   return {
     props: {
-      product,
-      // product: "testing buid" // Testing Build,
+      // product,
+      product: "testing buid" // Testing Build,
     },
   };
 }
