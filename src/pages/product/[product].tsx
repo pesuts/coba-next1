@@ -1,10 +1,13 @@
-import { fetcher } from "@/libs/swr/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
+// import { fetcher } from "@/libs/swr/fetcher";
+// import { useRouter } from "next/router";
+// import useSWR from "swr";
 
-import Custom404 from "../404";
+// import Custom404 from "../404";
 import DetailProductView from "@/views/DetailProduct";
-import { ProductProps, ProductType } from "@/types/product.type";
+import {
+  ProductProps,
+  ProductType
+} from "@/types/product.type";
 
 //**** CLIENT SIDE RENDERING
 // const DetailProductPage = () => {
@@ -89,6 +92,13 @@ export async function getStaticPaths() {
     },
   }));
 
+  //** Testing Build
+  // const paths = [{
+  //   params: {
+  //     product: "asu",
+  //   },
+  // }]
+
   return { paths, fallback: false };
 }
 
@@ -106,6 +116,7 @@ export async function getStaticProps({
   return {
     props: {
       product,
+      // product: "testing buid" // Testing Build,
     },
   };
 }
