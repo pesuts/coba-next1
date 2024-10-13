@@ -7,5 +7,8 @@ export interface ProductType {
 };
 
 export interface ProductsProps { 
-  products: ProductType[]
+  products?: ProductType[]
+}
+export interface ProductProps { 
+  product?: ProductType
 }

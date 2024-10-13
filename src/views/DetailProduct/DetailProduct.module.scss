@@ -1,0 +1,36 @@
+.title{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.productDetail {
+  width: 25%;
+  margin: 0 auto;
+  background-color: antiquewhite;
+  &__title {
+    font-size: 32px;
+    text-align: center;
+    font-weight: bold;
+  }
+  &__name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  &__price {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}
+
+@keyframes blinking {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
