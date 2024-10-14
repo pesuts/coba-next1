@@ -3,7 +3,6 @@ import { ProductsProps } from "@/types/product.type";
 
 const ProductPage = ({ products }: ProductsProps) => {
   // const { products } = props;
-  // console.log(products);
   return (
     <div>
       <ProductView products={products} />

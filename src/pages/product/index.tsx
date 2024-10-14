@@ -1,7 +1,7 @@
 import { fetcher } from "@/libs/swr/fetcher";
 import ProductView from "@/views/Product";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useEffect, useState } from "react";
 import useSWR from "swr";
 // import { ProductType } from "../../types/product.type";
 
@@ -11,27 +11,23 @@ import useSWR from "swr";
 // };
 
 const ProductPage = () => {
-  const [isLogin] = useState(true);
+  // const [isLogin] = useState(true);
   // const [products, setProducts] = useState<ProductType[]>([]);
-  const { push } = useRouter();
+  // const { push } = useRouter();
 
-  useEffect(() => {
-    if (!isLogin) {
-      push("/auth/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isLogin) {
+      // push("/auth/login");
+  //   }
+  // }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data, error, isLoading } = useSWR("/api/product", fetcher);
-
-  console.log(data);
-  console.log(error);
-  console.log(isLoading);
 
   // useEffect(() => {
   //   fetch("/api/product")
   //     .then((res) => res.json())
   //     .then((response: Response) => {
-  //       // console.log(response);
   //       setProducts(response.data);
   //     });
   // }, []);

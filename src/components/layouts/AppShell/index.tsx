@@ -11,8 +11,6 @@ const AppShell = (props: AppShellProps) => {
   const { children } = props; 
   const { pathname } = useRouter();
 
-  // console.log(router);
-
   return (
     <main>
       {!disableNavbar.includes(pathname) && <Navbar />}
