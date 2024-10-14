@@ -6,4 +6,23 @@
   color: white;
   align-items: center;
   padding: 40px;
+  justify-content: space-between;
+}
+
+.navbar button {
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.navbar button:hover {
+  background-color: white;
+  color: black;
+  font-weight: 600;
+}
+
+.logout{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

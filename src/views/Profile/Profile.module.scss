@@ -1,0 +1,21 @@
+.profile{
+  margin: 0 auto;
+  width: 50%;
+  align-items: center; 
+  // text-align: center;
+  h1{
+    text-align: center;
+    padding: 25px 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  &__container{
+    display: flex;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    &__data{
+      // text-align: center;
+    }
+  }
+}
