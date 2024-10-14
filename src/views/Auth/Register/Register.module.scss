@@ -1,13 +1,13 @@
 @import "@/styles/colors.scss";
 
-.login {
+.register {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   background-color: map-get($schema, primary);
-
+  
   span{
     color: #527474;
     font-weight: 600;
@@ -16,6 +16,11 @@
   span:hover{
     color: #223b3b;
     font-weight: 600;
+  }
+
+  &__error__message{
+    color: red;
+    margin: 0;
   }
 
   &__title {

@@ -3,29 +3,52 @@ import { useRouter } from "next/router";
 
 import style from "./Login.module.scss";
 
-const LoginViews = () => {
+const LoginView = () => {
   const { push } = useRouter();
 
   const handleLogin = () => {
     push("/product");
   };
 
-  const styles = {
-    color: "red",
-    border: "1px solid red",
-    borderRadius: "15px",
-    padding: "10px",
-  };
-
   return (
     <div className={style.login}>
-      <h1 className="text-4xl font-bold">Login Page</h1>
-      <button onClick={handleLogin}>Login</button>
-      <p style={styles}>
-        Belum punya akun? Register <Link href={"register"}>disini</Link>
-      </p>
+    <h1 className={style.login__title}>Login Page</h1>
+    <div className={style.login__form}>
+      <form action="">
+        <div className={style.login__form__item}>
+          <label htmlFor="email" className={style.login__form__item__label}>
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required={true}
+            className={style.login__form__item__input}
+          />
+        </div>
+        <div className={style.login__form__item}>
+          <label htmlFor="password" className={style.login__form__item__label}>
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required={true}
+            className={style.login__form__item__input}
+          />
+        </div>
+        <button type="submit" onClick={handleLogin}>Login</button>
+      </form>
     </div>
+    <p>
+      Belum punya akun? Register <Link href={"register"}><span>disini</span></Link>
+    </p>
+  </div>
   );
 };
 
-export default LoginViews;
+export default LoginView;
