@@ -4,6 +4,7 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const { data } = useSession();
+
   return (
     <div className={styles.navbar}>
       <div className="big">Navbar</div>

@@ -18,6 +18,11 @@
     font-weight: 600;
   }
 
+  &__error__message{
+    color: red;
+    margin: 0;
+  }
+
   &__title {
     font-size: 2rem;
     font-weight: 800;

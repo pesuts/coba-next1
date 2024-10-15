@@ -1,3 +1,5 @@
+import { signIn } from "@/libs/firebase/service";
+import { compare } from "bcrypt";
 import NextAuth, { NextAuthOptions } from "next-auth";
 // import CredentialsProvider from "next-auth/providers/credentials";
 // CredentialsProvider
@@ -6,6 +8,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 declare module "next-auth" {
   interface User {
     fullName: string;
+    role: string;
   }
 }
 
@@ -26,29 +29,27 @@ const authOptions: NextAuthOptions = {
         password: {
           label: "Password",
           type: "password",  
-        },
-        fullName: {
-          label: "Full Name",
-          type: "text",  
         }
       },
-
-      async authorize(credentials) { 
-        const { email, password, fullName } = credentials as {
+      authorize: async (credentials) => { 
+        const { email, password } = credentials as {
           email: string,
-          password: string
-          fullName: string
+          password: string,
         };
-        const user = {
-          id: "1",
-          email: email,
-          password: password,
-          fullName: fullName,
-        }
+        // const user = {
+        //   id: "1",
+        //   email: email,
+        //   password: password,
+        // }
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const user: any = await signIn({ email });
         if (user) {
+          const passwordConfirm = await compare(password, user.password);
+          if (passwordConfirm) {
+            return user;
+          } else return null;
           // console.log(user);
-          return user;
         } else { 
           return null;
         }
@@ -57,26 +58,33 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    jwt({ token, account, profile, user }) { 
+    jwt: ({ token, account, profile, user }) => { 
       if (account?.provider === "credentials") { 
         token.email = user.email;
         token.fullName = user.fullName;
+        token.role = user.role;
       }
       // console.log(token, account, user);
       return token;
     },
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async session({ session, token }: any) { 
+    session: async ({ session, token }: any) => { 
       if ("email" in token) { 
         session.user.email = token.email;
       }
-      if ("fullName" in token) {
+      if ("fullName" in token) { 
         session.user.fullName = token.fullName;
       }
-      // console.log(session, token);
+      if ("role" in token) { 
+        session.user.role = token.role;
+      }
+      console.log("session le", session);
       return session;
     }
+  },
+  pages: {
+    signIn: "/auth/login"
   }
 };
 

@@ -1,4 +1,4 @@
-import bcrpyt from 'bcrypt';
+import bcrpyt from "bcrypt";
 import {
   addDoc,
   collection,
@@ -31,31 +31,55 @@ export async function retrieveDataById(collectionName: string, id: string) {
   return data;
 }
 
-export async function signUp(userData: {
-  email: string;
-  fullName: string;
-  password: string;
-  role?: string;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-}, callback: Function) { 
-  const q = query(collection(firestore, "users"), where("email", "==", userData.email))
+export async function signUp(
+  userData: {
+    email: string;
+    fullName: string;
+    password: string;
+    role?: string;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  callback: Function
+) {
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", userData.email)
+  );
   const snapshot = await getDocs(q);
   const data = snapshot.docs.map((doc) => ({
     id: doc.id,
-    ...doc.data()
-  }))
-  
+    ...doc.data(),
+  }));
+
   if (data.length > 0) {
-    callback({status: false, message: "Email already exist"});
+    callback({ status: false, message: "Email already exist" });
   } else {
     userData.password = await bcrpyt.hash(userData.password, 10);
     userData.role = "member";
     await addDoc(collection(firestore, "users"), userData)
       .then(() => {
-        callback(({ status: true, message: "Register success" }))
+        callback({ status: true, message: "Register success" });
       })
-      .catch((error) => { 
-        callback({status: false, message: error});
+      .catch((error) => {
+        callback({ status: false, message: error });
       });
   }
+}
+
+export async function signIn(userData: { email: string }) {
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", userData.email)
+  );
+
+  const snapshot = await getDocs(q);
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (data) {
+    return data[0];
+  } else return null;
 }
