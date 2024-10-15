@@ -7,6 +7,7 @@ import {
   getDocs,
   getFirestore,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import app from "./init";
@@ -82,4 +83,46 @@ export async function signIn(userData: { email: string }) {
   if (data) {
     return data[0];
   } else return null;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-function-type
+export async function signInWithGoogle(userData: any, callback: Function) {
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", userData.email)
+  );
+
+  const snapshot = await getDocs(q);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  if (data.length > 0) {
+    userData.role = data[0].role;
+    await updateDoc(doc(firestore, "users", data[0].id), userData)
+      .then(() => {
+        callback({
+          status: true,
+          message: "Sign in with google success",
+          data: userData,
+        });
+      })
+      .catch(() => {
+        callback({ status: false, message: "Sign in with google failed" });
+      });
+  } else {
+    userData.role = "member";
+    await addDoc(collection(firestore, "users"), userData)
+      .then(() => {
+        callback({
+          status: true,
+          message: "Sign in with google success",
+          data: userData,
+        });
+      })
+      .catch(() => {
+        callback({ status: false, message: "Sign in with google failed" });
+      });
+  }
 }

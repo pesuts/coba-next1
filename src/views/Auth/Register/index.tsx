@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import style from "./Register.module.scss";
+// import style from "./Register.module.scss";
+import style from "../Auth.module.scss";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 const RegisterView = () => {
   const { push } = useRouter();
@@ -37,70 +39,87 @@ const RegisterView = () => {
   };
 
   return (
-    <div className={style.register}>
-      <h1 className={style.register__title}>Register Page</h1>
-      {error && <p className={ style.register__error__message }>{error}</p>}
-      <div className={style.register__form}>
-        <form onSubmit={handleSubmit}>
-          <div className={style.register__form__item}>
-            <label
-              htmlFor="fullName"
-              className={style.register__form__item__label}
+    <div className={style.body}>
+      <div className={style.register}>
+        <h1 className={style.register__title}>Register</h1>
+        {error && <p className={style.register__error__message}>{error}</p>}
+        <div className={style.register__form}>
+          <form onSubmit={handleSubmit}>
+            <div className={style.register__form__item}>
+              <label
+                htmlFor="fullName"
+                className={style.register__form__item__label}
+              >
+                Nama Lengkap
+              </label>
+              <input
+                type="text"
+                name="fullName"
+                id="fullName"
+                placeholder="Nama Lengkap"
+                required={true}
+                className={style.register__form__item__input}
+              />
+            </div>
+            <div className={style.register__form__item}>
+              <label
+                htmlFor="email"
+                className={style.register__form__item__label}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                required={true}
+                className={style.register__form__item__input}
+              />
+            </div>
+            <div className={style.register__form__item}>
+              <label
+                htmlFor="password"
+                className={style.register__form__item__label}
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                required={true}
+                className={style.register__form__item__input}
+              />
+            </div>
+            <button
+              type="submit"
+              className={style.register__form__item__button}
+              disabled={isLoading}
             >
-              Nama Lengkap
-            </label>
-            <input
-              type="text"
-              name="fullName"
-              id="fullName"
-              placeholder="Nama Lengkap"
-              required={true}
-              className={style.register__form__item__input}
-            />
-          </div>
-          <div className={style.register__form__item}>
-            <label
-              htmlFor="email"
-              className={style.register__form__item__label}
+              {isLoading ? "Loading..." : "Register"}
+            </button>
+            <button
+              className={style.register__form__item__google}
+              onClick={() => {
+                signIn("google", {
+                  callbackUrl: "/",
+                  redirect: false,
+                });
+              }}
             >
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              required={true}
-              className={style.register__form__item__input}
-            />
-          </div>
-          <div className={style.register__form__item}>
-            <label
-              htmlFor="password"
-              className={style.register__form__item__label}
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              required={true}
-              className={style.register__form__item__input}
-            />
-          </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Register"}
-          </button>
-        </form>
+              Sign in with Google
+            </button>
+          </form>
+        </div>
+        <p className={style.register__CTA}>
+          Sudah punya akun? Login{" "}
+          <Link href={"login"}>
+            <span>disini</span>
+          </Link>
+        </p>
       </div>
-      <p>
-        Sudah punya akun? Login{" "}
-        <Link href={"login"}>
-          <span>disini</span>
-        </Link>
-      </p>
     </div>
   );
 };

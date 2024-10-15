@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import style from "./Login.module.scss";
+// import style from "./Login.module.scss";
+import style from "../Auth.module.scss";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
@@ -12,7 +13,7 @@ const LoginView = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const callbackUrl: any = query.callbackUrl || "/profile";
-  console.log("callbackUrl", callbackUrl)
+  console.log("callbackUrl", callbackUrl);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (event: any) => {
@@ -35,7 +36,7 @@ const LoginView = () => {
       if (res?.error) {
         event.target.reset();
         setError("Email or password incoerrect");
-      } else { 
+      } else {
         push(callbackUrl);
         // push("/profile");
       }
@@ -49,49 +50,70 @@ const LoginView = () => {
   };
 
   return (
-    <div className={style.login}>
-      <h1 className={style.login__title}>Login Page</h1>
-      {error && <p className={style.login__error__message}>{error}</p>}
-      <div className={style.login__form}>
-        <form onSubmit={handleSubmit}>
-          <div className={style.login__form__item}>
-            <label htmlFor="email" className={style.login__form__item__label}>
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              required={true}
-              className={style.login__form__item__input}
-            />
-          </div>
-          <div className={style.login__form__item}>
-            <label
-              htmlFor="password"
-              className={style.login__form__item__label}
+    <div className={style.body}>
+      <div className={style.login}>
+        <div className={style.login__title}>
+          <h1>Login</h1>
+        </div>
+        {error && <p className={style.login__error__message}>{error}</p>}
+        <div className={style.login__form}>
+          <form onSubmit={handleSubmit}>
+            <div className={style.login__form__item}>
+              <label htmlFor="email" className={style.login__form__item__label}>
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                required={true}
+                className={style.login__form__item__input}
+              />
+            </div>
+            <div className={style.login__form__item}>
+              <label
+                htmlFor="password"
+                className={style.login__form__item__label}
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                required={true}
+                className={style.login__form__item__input}
+              />
+            </div>
+            <button
+              type="submit"
+              className={style.login__form__item__button}
+              disabled={isLoading}
             >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              required={true}
-              className={style.login__form__item__input}
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
+              {isLoading ? "Loading..." : "Login"}
+            </button>
+            <button
+              className={style.login__form__item__google}
+              onClick={() => {
+                signIn("google", {
+                  callbackUrl,
+                  redirect: false,
+                });
+              }}
+            >
+              Sign in with Google
+            </button>
+          </form>
+        </div>
+        <p className={style.login__CTA}>
+          Belum punya akun? Register{" "}
+          <Link href={"register"}>
+            <span>disini</span>
+          </Link>
+        </p>
       </div>
-      <p>
-        Belum punya akun? Register{" "}
-        <Link href={"register"}>
-          <span>disini</span>
-        </Link>
-      </p>
     </div>
   );
 };

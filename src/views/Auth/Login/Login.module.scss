@@ -1,12 +1,17 @@
 @import "@/styles/colors.scss";
 
+.body{
+  background-color: map-get($schema, primary);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .login {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: map-get($schema, primary);
 
   span{
     color: #527474;
@@ -24,8 +29,15 @@
   }
 
   &__title {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 800;
+    display: flex;
+    align-items: start;
+    h1{
+      // text-align: start;
+      align-items: start;
+    }
   }
 
   &__form {
@@ -49,18 +61,31 @@
         border-radius: 5px;
       }
       justify-content: space-between;
-    }
-    button {
-      width: 100%;
-      margin-top: 40px;
-      padding: 10px 80px;
-      background-color: rgb(32, 69, 100);
-      color: white;
-      border-radius: 10px;
-      text-align: center;
-    }
-    button:hover {
+      &__button, &__google {
+        width: 100%;
+        padding: 10px 50px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      &__button {
+        margin-top: 30px;
+        background-color: rgb(32, 69, 100);
+        color: white;
+      }
+      &__button:hover {
       background-color: rgb(24, 50, 71);
+      }
+      &__google {
+        margin-top: 10px;
+        background-color: rgb(255, 255, 255);
+        color: rgb(73, 73, 73);
+      }
+      &__google:hover {
+      background-color: rgb(218, 218, 218);
+      }
     }
+  }
+  &__CTA {
+    text-align: center;
   }
 }

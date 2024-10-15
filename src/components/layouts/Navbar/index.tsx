@@ -4,13 +4,27 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const { data } = useSession();
+  const user = data?.user as {
+    email: string;
+    fullName: string;
+    role: string;
+    image: string;
+  };
 
   return (
     <div className={styles.navbar}>
       <div className="big">Navbar</div>
-      {data ? (
+      {user ? (
         <div className={styles.logout}>
-          <p>{data.user?.name}</p>
+          {user?.image && (
+            <img
+              src={user?.image}
+              alt={user?.fullName}
+              className={styles.picture}
+              width={35}
+            />
+          )}
+          <p>{user.fullName}</p>
           <button onClick={() => signOut()}>Sign Out</button>
         </div>
       ) : (

@@ -26,3 +26,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.picture{
+  border-radius: 50%;
+}
