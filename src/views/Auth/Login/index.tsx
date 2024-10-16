@@ -13,7 +13,7 @@ const LoginView = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const callbackUrl: any = query.callbackUrl || "/profile";
-  console.log("callbackUrl", callbackUrl);
+  // console.log("callbackUrl", callbackUrl);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (event: any) => {

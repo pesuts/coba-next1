@@ -9,7 +9,7 @@ const ProfilePage = () => {
     email: string;
     image?: string;
   };
-  console.log(profile);
+  // console.log(profile);
   return <div>{profile && <ProfileView profile={profile} />}</div>;
 };
 

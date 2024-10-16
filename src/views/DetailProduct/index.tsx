@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./DetailProduct.module.scss";
 import { ProductProps } from "@/types/product.type";
 
@@ -10,7 +11,7 @@ const DetailProductView = ({ product }: ProductProps) => {
         </h1>
         <div className={styles.productDetail}>
           <div className={styles.productDetail__image}>
-            <img src={product.image} alt={product.image} width={350} />
+            <Image src={product.image} alt={product.image} width={350} height={350}/>
           </div>
           <h4 className={styles.productDetail__name}>{product.name}</h4>
           <h4 className={styles.productDetail__category}>{product.category}</h4>

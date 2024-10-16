@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ProfileProps } from "../../types/profile.type";
 import styles from "./Profile.module.scss";
 
@@ -8,11 +9,12 @@ const ProfileView = ({ profile }: ProfileProps) => {
       <div className={styles.profile__container}>
         <div className={styles.profile__container__data}>
           {profile?.image && (
-            <img
+            <Image
               src={profile?.image}
               alt={profile?.fullName}
               className={styles.profile__container__data__picture}
               width={150}
+              height={150}
             />
           )}
           {/* <p>{profile?.image}</p> */}

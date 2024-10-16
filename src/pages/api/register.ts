@@ -15,7 +15,7 @@ export default async function handler(
     await signUp(
       req.body,
       ({ status, message }: { status: boolean; message: string }) => {
-        console.log(status, message);
+        // console.log(status, message);
         if (status) {
           return res.status(200).json({ status: status, message: message });
         }
