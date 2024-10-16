@@ -1,28 +1,28 @@
-import ProductView from "@/views/Product";
-import { ProductsProps } from "@/types/product.type";
+// import ProductView from "@/views/Product";
+// import { ProductsProps } from "@/types/product.type";
 
-const ProductPage = ({ products }: ProductsProps) => {
-  // const { products } = props;
-  return (
-    <div>
-      <ProductView products={products} />
-      {/* <ProductView products={[]} /> */}
-    </div>
-  );
-};
+// const ProductPage = ({ products }: ProductsProps) => {
+//   // const { products } = props;
+//   return (
+//     <div>
+//       <ProductView products={products} />
+//       {/* <ProductView products={[]} /> */}
+//     </div>
+//   );
+// };
 
-export default ProductPage;
+// export default ProductPage;
 
-export async function getStaticProps() {
-  // Fetch data
-  const res = await fetch("http://localhost:3000/api/product");
-  const response = await res.json();
+// export async function getStaticProps() {
+//   // Fetch data
+//   const res = await fetch("http://localhost:3000/api/product");
+//   const response = await res.json();
 
-  return {
-    props: {
-      products: response.data,
-      // products: [] // Testing Build,
-    },
-    // revalidate: 60 // seconds,
-  };
-}
+//   return {
+//     props: {
+//       products: response.data,
+//       // products: [] // Testing Build,
+//     },
+//     // revalidate: 60 // seconds,
+//   };
+// }

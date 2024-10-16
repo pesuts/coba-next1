@@ -2,11 +2,11 @@
 // import { useRouter } from "next/router";
 // import useSWR from "swr";
 
-// import Custom404 from "../404";
+import Custom404 from "../404";
 import DetailProductView from "@/views/DetailProduct";
 import {
   ProductProps,
-  ProductType
+  // ProductType
 } from "@/types/product.type";
 
 //**** CLIENT SIDE RENDERING
@@ -35,88 +35,89 @@ import {
 // export default DetailProductPage;
 
 //**** SERVER SIDE RENDERING
-// const DetailProductPage = ({ product }: ProductProps) => {
-//   return (
-//     <div>
-//       {/* <DetailProductView product={product} /> */}
-//        {(product && (Object.keys(product).length > 0)) ? (
-//          <DetailProductView product={product} />
-//         ) : (
-//          <Custom404 message="Product Not Found" />
-//        )}
-//     </div>
-//   );
-// };
-
-// export default DetailProductPage;
-
-// export async function getServerSideProps({
-//   params,
-// }: {
-//   params: { product: string };
-// }) {
-//   const productId = params.product;
-
-//   const response = await fetch(
-//     `http://localhost:3000/api/product/${productId}`
-//   );
-//   const JSONresponse = await response.json();
-//   const product = JSONresponse.data;
-
-//   return {
-//     props: {
-//       product: product ?? {},
-//     },
-//   };
-// }
-
-
-//**** STATIC RENDERING DYNAMIC ROUTES
 const DetailProductPage = ({ product }: ProductProps) => {
   return (
     <div>
-      <DetailProductView product={product} />
+      {/* <DetailProductView product={product} /> */}
+       {(product && (Object.keys(product).length > 0)) ? (
+         <DetailProductView product={product} />
+        ) : (
+         <Custom404 message="Product Not Found" />
+       )}
     </div>
   );
 };
 
 export default DetailProductPage;
 
-export async function getStaticPaths() {
-  const res = await fetch(`http://localhost:3000/api/product`);
-  const response = await res.json();
-
-  const paths = response.data.map((product: ProductType) => ({
-    params: {
-      product: product.id,
-    },
-  }));
-
-  //** Testing Build
-  // const paths = [{
-  //   params: {
-  //     product: "asu",
-  //   },
-  // }]
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({
-  // params,
+export async function getServerSideProps({
+  params,
 }: {
   params: { product: string };
 }) {
-  // const productId = params.product;
-  // const response = await fetch(
-  //   `http://localhost:3000/api/product/${productId}`
-  // );
-  // const JSONresponse = await response.json();
-  // const product = JSONresponse.data;
+  const productId = params.product;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product/${productId}`
+    // `http://localhost:3000/api/product/${productId}`
+  );
+  const JSONresponse = await response.json();
+  const product = JSONresponse.data;
+
   return {
     props: {
-      // product,
-      product: "testing buid" // Testing Build,
+      product: product ?? {},
     },
   };
 }
+
+
+//**** STATIC RENDERING DYNAMIC ROUTES
+// const DetailProductPage = ({ product }: ProductProps) => {
+//   return (
+//     <div>
+//       <DetailProductView product={product} />
+//     </div>
+//   );
+// };
+
+// export default DetailProductPage;
+
+// export async function getStaticPaths() {
+//   const res = await fetch(`http://localhost:3000/api/product`);
+//   const response = await res.json();
+
+//   const paths = response.data.map((product: ProductType) => ({
+//     params: {
+//       product: product.id,
+//     },
+//   }));
+
+//   //** Testing Build
+//   // const paths = [{
+//   //   params: {
+//   //     product: "asu",
+//   //   },
+//   // }]
+
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({
+//   // params,
+// }: {
+//   params: { product: string };
+// }) {
+//   // const productId = params.product;
+//   // const response = await fetch(
+//   //   `http://localhost:3000/api/product/${productId}`
+//   // );
+//   // const JSONresponse = await response.json();
+//   // const product = JSONresponse.data;
+//   return {
+//     props: {
+//       // product,
+//       product: "testing buid" // Testing Build,
+//     },
+//   };
+// }
