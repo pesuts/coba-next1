@@ -1,4 +1,4 @@
-import { fetcher } from "@/libs/swr/fetcher";
+import { fetcher } from "@/lib/swr/fetcher";
 import ProductView from "@/views/Product";
 // import { useRouter } from "next/router";
 // import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ const ProductPage = () => {
 
   // useEffect(() => {
   //   if (!isLogin) {
-      // push("/auth/login");
+  // push("/auth/login");
   //   }
   // }, []);
 
@@ -38,7 +38,7 @@ const ProductPage = () => {
       {products.map((product: ProductType) => { 
         return (<div key={product.id}>{product.name}</div>)
       })} */}
-      <ProductView products={isLoading ? [] : data.data} />
+      <ProductView products={isLoading ? [] : data?.data} />
       {/* <ProductView products={products} /> */}
     </div>
   );
