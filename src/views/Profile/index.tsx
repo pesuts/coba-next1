@@ -15,7 +15,7 @@ const ProfileView = ({ profile }: ProfileProps) => {
               width={150}
             />
           )}
-          <p>{profile?.image}</p>
+          {/* <p>{profile?.image}</p> */}
           <div>Name : {profile?.fullName}</div>
           <div>Email : {profile?.email}</div>
         </div>
